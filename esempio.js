@@ -9,10 +9,10 @@ const accreditamento = () => {
      server non sa che gli state mandando questo tipo di dato
    * ricordare sempre di mettere i console log del resBody e il catch nella promise chain 
   */
-  fetch("http://192.168.1.60:8080/accreditamento", {
+  fetch("http://192.168.1.231:8080/accreditamento", {
       method: "post",
       body: JSON.stringify({
-        nome: "Giovanni Bruno"
+        nome: "Lorenzo Cagossi"
       }),
       headers: {
         "Content-Type": "application/json"
@@ -30,7 +30,7 @@ const es1 = () => {
    * ricordare di inserire l'header x-data: 'true' altrimenti non vengono passati i dati da elaborare
      ma solo il messaggio dell'esercizio
   */
-  fetch("http://192.168.1.60:8080/esercizi/1", {
+  fetch("http://192.168.1.231:8080/esercizi/1", {
       method: "get",
       headers: {
         "x-data": "true"
@@ -47,7 +47,7 @@ const es1 = () => {
     const risultato = reqData.toLowerCase()
     console.log(risultato)
 
-    return fetch("http://192.168.1.60:8080/esercizi/1", {
+    return fetch("http://192.168.1.231:8080/esercizi/1", {
       method: "post",
       body: JSON.stringify({
         data: risultato
