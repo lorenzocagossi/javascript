@@ -23,31 +23,8 @@ const accreditamento = () => {
   .catch(err => console.log(err))
 }
 
-const es1 = () => {
-  /*
-   richiesta in post all'endpoint dell'accreditamento;
-   nota bene:
-   * ricordare di inserire l'header x-data: 'true' altrimenti non vengono passati i dati da elaborare
-     ma solo il messaggio dell'esercizio
-  */
-  fetch("http://192.168.1.231:8080/esercizi/1", {
-      method: "get",
-      headers: {
-        "x-data": "true"
-      },
-  })
-  .then(res => res.json())
-  .then(resBody => {
-    /*
-      resBody e' sempre un oggetto contentente le chiavi message e data.
-      Data a seconda dell'esercizio puo' essere un tipo di dato differente
-      es: stringa, number, array, object...
-    */
-    const reqData = resBody.data
-    const risultato = reqData.toLowerCase()
-    console.log(risultato)
-
-    return fetch("http://192.168.1.231:8080/esercizi/1", {
+const response = (es,risultato) => {
+    fetch(`http://192.168.1.231:8080/esercizi/${es}`, {
       method: "post",
       body: JSON.stringify({
         data: risultato
@@ -55,11 +32,33 @@ const es1 = () => {
       headers: {
         "Content-Type": "application/json"
       }  
-    })
-  })
-  .then(res => res.json())
-  .then(resBody => console.log(resBody))
-  .catch(err => console.log(err))
+    }).then(res => res.json()).then(data => console.log(data))
 }
 
-es1()
+const consegna = (es) => {
+  /*
+   richiesta in post all'endpoint dell'accreditamento;
+   nota bene:
+   * ricordare di inserire l'header x-data: 'true' altrimenti non vengono passati i dati da elaborare
+     ma solo il messaggio dell'esercizio
+  */
+  fetch(`http://192.168.1.231:8080/esercizi/${es}`, {
+      method: "get",
+      headers: {
+        "x-data": "true"
+      },
+  })
+  .then(res => res.json())
+  .then(resBody => {
+    console.log(resBody)
+    let {data} = resBody
+    //--------------------------------------------------
+    data=data.filter((e)=>e.length>4).map(e => e.toUpperCase())
+    //--------------------------------------------------
+    response(es,data)
+  })
+}
+
+
+
+consegna(3)
