@@ -1,3 +1,4 @@
+"use strict"
 //tutti i require
 const fetch = require("node-fetch")
 
