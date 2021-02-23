@@ -14,9 +14,7 @@ const es1 = () => {
         data
             .filter(e => e.postId === 1)
             .filter(e => e.name.split(" ").length<=5)
-            .forEach(e => console.log(e.name))
-            
-            
+            .forEach(e => console.log(e.name))       
     })
 }
 
@@ -30,4 +28,28 @@ const es2 = () => {
             .forEach(e => console.log(e.email))  
     })
 }
+
+const es3 = () => {
+    console.log("stampo solo le vocali contenute nel body dei commenti dell'user 1 \n")
+    fetch('https://jsonplaceholder.typicode.com/comments')
+    .then(res => res.json())
+    .then(data =>{
+        data
+            .filter(e => e.postId === 1)
+            .forEach(e => console.log(e.body.split("").filter(e => e === 'a' || e === 'e' || e === 'i' || e === 'o' || e === 'u')))            
+    })
+}
+
+const es4 = () => {
+    console.log("stampo solo le lettere dispari nel body del commento #1 (in maiuscolo) \n")
+    fetch('https://jsonplaceholder.typicode.com/comments')
+    .then(res => res.json())
+    .then(data =>{
+        data
+            .filter(e => e.id === 1)
+            .forEach(e => console.log(e.body.toUpperCase().split("").filter((e,i) => i%2===0 )))          
+    })
+}
+
+es4()
 
