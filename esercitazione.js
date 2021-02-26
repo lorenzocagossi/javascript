@@ -48,36 +48,11 @@ const somma = (data, m=-1) => {
 const divisore= (n) => {
     let num=[]
     for(let i=0; i<n+1; i++){
-        if(n%i===0){
+        if(n%i==0){
             num.push(i)
         }
     }
     return num
-}
-
-let es30 = (data) => {
-    let x=0
-    let y=1
-    let xp
-    let yp
-    console.log(data)
-    data=data.split("")
-    data.forEach(e => {
-        if(e=="\n"){
-            y++
-            x=0
-        }
-        if(e=="X"){
-            yp=y
-            xp=x
-        }
-        else{
-            x++
-        }
-    })
-
-    let json = {"x": xp-1, "y": yp-1}
-    return json
 }
 
 let es1 = (data) => {
@@ -176,6 +151,7 @@ let es15 = (data) => {
     data=l
     return data
 }
+
 let es16 = (data) => {
     let string=""
     for(let i=0; i<data.length; i++){
@@ -204,6 +180,105 @@ let es18 = (data) =>{
     return data
 }
 
+let es19 = (data) =>{
+    data=divisore(data)
+    console.log(data)
+    return data
+}
+
+let es20 = (data) =>{
+    let l=[]
+    data.forEach(e => l.push(e.figli.length))
+    data=l
+    return data
+}
+
+let es21 = (data) =>{
+    data=data.filter(e => e<=5)
+    return data
+}
+
+let es22 = (data) =>{
+    data=data.filter(e => e<=6 && e>=3)
+    return data
+}
+
+let es23 = (data) =>{
+    let s=0
+    data.forEach(e => s+=e.anni)
+    data=s
+    return data
+}
+
+let es24= (data) =>{
+    data=data.filter(e => e.cognome[0]==="C")
+    let nomi=[]
+    data.forEach(e => nomi.push(e.nome))
+    data=nomi
+    return data
+}
+
+let es25 = (data) =>{
+    let n=0
+    data=data.forEach(e => {
+        world=e.split("")
+        world.forEach(e =>{if(e=="a"){n++}})
+    })
+    data=n
+    return data
+}
+
+let es26 = (data) =>{
+    data=data.map(e => e*-1)
+    return data
+}
+
+let es27 = (data) =>{
+    let l=[]
+    data.magazzino.forEach(e => l.push(e))
+    data.negozio.forEach(e => l.push(e))
+    l.sort()
+    for(let i=0; i<l.length-1; i++){
+        if(l[i]==l[i+1]){
+            l.splice(i,1)
+        }
+    }
+    data=l
+    return data
+}
+
+let es29 = (data) =>{
+    for(let i=data-1; i>0 ; i--){
+        data=data*i
+    }
+    console.log(data)
+    return data
+}
+
+let es30 = (data) => {
+    let x=0
+    let y=1
+    let xp
+    let yp
+    console.log(data)
+    data=data.split("")
+    data.forEach(e => {
+        if(e=="\n"){
+            y++
+            x=0
+        }
+        if(e=="X"){
+            yp=y
+            xp=x
+        }
+        else{
+            x++
+        }
+    })
+
+    let json = {"x": xp-1, "y": yp-1}
+    return json
+}
 
 
 const consegna = (es) => {
@@ -226,8 +301,8 @@ const consegna = (es) => {
     //--------------------------------------------------
 
     //--------------------------------------------------
-    response(es,es18(data))
+    response(es,es29(data))
     })
 }
 //accreditamento()
-consegna(18)
+consegna(29)
