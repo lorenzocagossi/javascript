@@ -9,7 +9,7 @@ const accreditamento = () => {
      server non sa che gli state mandando questo tipo di dato
    * ricordare sempre di mettere i console log del resBody e il catch nella promise chain 
   */
-  fetch("http://192.168.43.55:8080/accreditamento", {
+  fetch("http://192.168.0.21:8080/accreditamento", {
       method: "post",
       body: JSON.stringify({
         nome: "Lorenzo Cagossi"
@@ -24,7 +24,7 @@ const accreditamento = () => {
 }
 
 const response = (es,risultato) => {
-    fetch(`http://192.168.43.55:8080/esercizi/${es}`, {
+    fetch(`http://192.168.0.21:8080/esercizi/${es}`, {
       method: "post",
       body: JSON.stringify({
         data: risultato
@@ -53,6 +53,18 @@ const divisore= (n) => {
         }
     }
     return num
+}
+
+const magazzino = (data, n)  =>{
+    let l=[]
+    data.forEach(e => l.push(e))
+    l=l.sort()
+    for(let i=0; i<l.length-1; i++){
+        if(l[i]==l[i+1]){
+            l.splice(i,n)
+        }
+        return l
+    }
 }
 
 let es1 = (data) => {
@@ -247,6 +259,31 @@ let es27 = (data) =>{
     return data
 }
 
+let es28 = (data) =>{
+    let l=magazzino(data.negozio,2)
+    let c
+    let string ="{"
+    l.forEach(e =>{
+        c=0
+        for(let i=0; i<data.magazzino.length; i++){
+            if(data.magazzino[i]==e){c++}
+        }
+        for(let i=0; i<data.negozio.length; i++){
+            if(data.negozio[i]==e){c++}
+        }
+        string+="\""
+        string+=e
+        string+="\""
+        string+=" : "
+        string+=c
+        string+=", "
+    })
+    string=string.slice(0,-2)
+    string+="}"
+    data=JSON.parse(string)
+    return data
+}
+
 let es29 = (data) =>{
     for(let i=data-1; i>0 ; i--){
         data=data*i
@@ -288,7 +325,7 @@ const consegna = (es) => {
    * ricordare di inserire l'header x-data: 'true' altrimenti non vengono passati i dati da elaborare
      ma solo il messaggio dell'esercizio
   */
-  fetch(`http://192.168.43.55:8080/esercizi/${es}`, {
+  fetch(`http://192.168.0.21:8080/esercizi/${es}`, {
       method: "get",
       headers: {
         "x-data": "true"
@@ -299,10 +336,11 @@ const consegna = (es) => {
     console.log(resBody)
     let {data} = resBody
     //--------------------------------------------------
+    
 
     //--------------------------------------------------
-    response(es,es29(data))
+    response(es,es28(data))
     })
 }
 //accreditamento()
-consegna(29)
+consegna(28)
