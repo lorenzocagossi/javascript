@@ -165,16 +165,13 @@ let es15 = (data) => {
 }
 
 let es16 = (data) => {
-    let string=""
-    for(let i=0; i<data.length; i++){
-        if(i<data.length-1){
-            string+=data[i]
-            string+=" "
-        }
-        else{string+=data[i]}
-    }
-    data=string
-    console.log(data)
+    let s=""
+    data.forEach(e =>{
+        s+=e
+        s+=" "
+    })
+    s=s.slice(0,-1)
+    data=s
     return data
 }
 
@@ -339,8 +336,8 @@ const consegna = (es) => {
     
 
     //--------------------------------------------------
-    response(es,es28(data))
+    response(es,es16(data))
     })
 }
 //accreditamento()
-consegna(28)
+consegna(16)
