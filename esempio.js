@@ -36,12 +36,6 @@ const response = (es,risultato) => {
 }
 
 const consegna = (es) => {
-  /*
-   richiesta in post all'endpoint dell'accreditamento;
-   nota bene:
-   * ricordare di inserire l'header x-data: 'true' altrimenti non vengono passati i dati da elaborare
-     ma solo il messaggio dell'esercizio
-  */
      fetch('https://jsonplaceholder.typicode.com/photos')
      .then(res => res.json())
      .then(data =>{
@@ -52,6 +46,4 @@ const consegna = (es) => {
      })
 }
 
-
-
-consegna(3)
+consegna(1)
