@@ -42,21 +42,14 @@ const consegna = (es) => {
    * ricordare di inserire l'header x-data: 'true' altrimenti non vengono passati i dati da elaborare
      ma solo il messaggio dell'esercizio
   */
-  fetch(`http://192.168.1.231:8080/esercizi/${es}`, {
-      method: "get",
-      headers: {
-        "x-data": "true"
-      },
-  })
-  .then(res => res.json())
-  .then(resBody => {
-    console.log(resBody)
-    let {data} = resBody
-    //--------------------------------------------------
-    data=data.filter((e)=>e.length>4).map(e => e.toUpperCase())
-    //--------------------------------------------------
-    response(es,data)
-  })
+     fetch('https://jsonplaceholder.typicode.com/photos')
+     .then(res => res.json())
+     .then(data =>{
+         data
+             .forEach(e => e=e.url.substr(-6))
+             
+      response(es,data)
+     })
 }
 
 
