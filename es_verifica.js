@@ -32,15 +32,18 @@ fetch('https://jsonplaceholder.typicode.com/photos')
 
     console.log(c/n) 
     //console.log(Math.floor(c/n))   
-    console.log(String.fromCharCode(Math.floor(c/n)))   
+    console.log(String.fromCharCode(Math.round(c/n)))   
     })
 */
 
-
-fetch('https://jsonplaceholder.typicode.com/photos')
-.then(res => res.json())
-.then(data =>{
-    data
-        .forEach(e => console.log(e.url.substr(-6)))          
-})
-
+fetch('https://jsonplaceholder.typicode.com/albums').then(res => res.json())
+    .then(data =>{
+        let album = data.filter(e => e.id==1)[0]
+        fetch('https://jsonplaceholder.typicode.com/photos').then(res => res.json())
+            .then(data => {
+                let photo = data.filter(e => e.albumId==1)
+                
+                album.photos = photo.map(e => e.url)
+                console.log(album)
+            })            
+    })
